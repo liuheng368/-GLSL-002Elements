@@ -232,7 +232,11 @@
     }
     
     //载入纹理
-    glUniform1f(self.myProgram, texture);
+    //激活当前纹理
+    glActiveTexture(texture);
+    //0 代表第一个纹理图片
+    //若有多个纹理需要载入，需先激活当前纹理，然后根据顺序从0开始算。
+    glUniform1i(glGetUniformLocation(self.myProgram, "colorMap"), 0);
     
     glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(indices[0]), GL_UNSIGNED_INT, indices);
     
